@@ -1,9 +1,8 @@
 name: CI Build
-on:
+'on':
   push:
     branches:
       - main
-  
   pull_request:
     branches:
       - main
