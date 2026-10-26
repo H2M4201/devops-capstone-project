@@ -13,7 +13,6 @@ from service.common import status  # HTTP Status Codes
 from service.models import db, Account, init_db
 from service.routes import app
 from service import talisman
-from service import cors
 
 DATABASE_URI = os.getenv(
     "DATABASE_URI", "postgresql://postgres:postgres@localhost:5432/postgres"
@@ -172,7 +171,6 @@ class TestAccountService(TestCase):
         updated_account = resp.get_json()
         self.assertEqual(updated_account["name"], "Something Known")
 
-
     def test_update_account_not_found(self):
         """It should return 404 when updating a non-existent Account"""
         resp = self.client.put(f"{BASE_URL}/0", json={"name": "Something Known"})
@@ -203,5 +201,3 @@ class TestAccountService(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         # Check for the CORS header
         self.assertEqual(response.headers.get('Access-Control-Allow-Origin'), '*')
-
-
